@@ -33,22 +33,22 @@ class CardInfoActivity : AppCompatActivity() {
         labelString = "Product id: " + product.id + "\n" +
                 "Product name: " + product.name + "\n" +
                 "Head Inclination: \n" +
-                    "Y: " + product.angleY + "\n" +
-                    "Z: " + product.angleZ + "\n" +
-                    "right eye: " + product.rightEye + "\n" +
-                    "left eye: " + product.leftEye + "\n" +
-                    "smile: " + product.smile + "\n" +
+                    "\t Y: " + product.angleY + "\n" +
+                    "\t Z: " + product.angleZ + "\n" +
+                    "\t right eye: " + product.rightEye + "\n" +
+                    "\t left eye: " + product.leftEye + "\n" +
+                    "\t smile: " + product.smile + "\n" +
                 "Labels: \n" +
-                    label0Key + " - " + label0Value + "\n" +
-                    label1Key + " - " + label1Value + "\n" +
-                    label2Key + " - " + label2Value + "\n" +
-                    label3Key + " - " + label3Value + "\n" +
-                    label4Key + " - " + label4Value + "\n" +
-                    label5Key + " - " + label5Value + "\n" +
-                    label6Key + " - " + label6Value + "\n" +
-                    label7Key + " - " + label7Value + "\n" +
-                    label8Key + " - " + label8Value + "\n" +
-                    label9Key + " - " + label9Value + "\n"
+                    "\t" + label0Key + " - " + label0Value + "\n" +
+                    "\t" + label1Key + " - " + label1Value + "\n" +
+                    "\t" + label2Key + " - " + label2Value + "\n" +
+                    "\t" + label3Key + " - " + label3Value + "\n" +
+                    "\t" + label4Key + " - " + label4Value + "\n" +
+                    "\t" + label5Key + " - " + label5Value + "\n" +
+                    "\t" + label6Key + " - " + label6Value + "\n" +
+                    "\t" + label7Key + " - " + label7Value + "\n" +
+                    "\t" + label8Key + " - " + label8Value + "\n" +
+                    "\t" + label9Key + " - " + label9Value + "\n"
 
 
         val labelTextView:TextView = findViewById(R.id.product_labels)
