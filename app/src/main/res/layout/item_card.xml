@@ -31,9 +31,8 @@
                 android:id="@+id/item_card_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:textSize="26sp"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/item_card_subtitle"

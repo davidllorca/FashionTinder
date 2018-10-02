@@ -41,7 +41,6 @@ public class CardAdapter extends ArrayAdapter<Product> {
         final Product product = getItem(position);
 
         holder.name.setText(product.getName());
-        holder.subtitle.setText(product.getId());
         Picasso.get()
                 .load(product.getImage())
                 .into(holder.image, new Callback() {
@@ -73,7 +72,6 @@ public class CardAdapter extends ArrayAdapter<Product> {
 
         public ViewHolder(View view) {
             this.name = (TextView) view.findViewById(R.id.item_card_title);
-            this.subtitle = (TextView) view.findViewById(R.id.item_card_subtitle);
             this.image = (ImageView) view.findViewById(R.id.item_card_image);
             this.info = (ImageView) view.findViewById(R.id.produt_info_button);
         }
