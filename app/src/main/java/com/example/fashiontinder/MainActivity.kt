@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener
 class MainActivity : AppCompatActivity(), CardAdapter.Listener {
     override fun onClick(product: Product?) {
         val intent = Intent(this, CardInfoActivity::class.java)
-        intent.addExtra()
+        intent.putExtra("product", product)
         startActivity(intent)
     }
 
@@ -73,6 +73,10 @@ class MainActivity : AppCompatActivity(), CardAdapter.Listener {
                 Log.d("CardStackView", "topIndex: " + activity_main_card_stack_view?.topIndex)
                 val item = adapter?.getItem(activity_main_card_stack_view?.topIndex ?: 0)
                 Log.d("CardStackView", item.toString())
+
+
+                updateLike(item!!.id, item.likes)
+
                 // TODO DELETE. We want finite stack
                 if (activity_main_card_stack_view?.topIndex == adapter?.count?.minus(5)) {
                     Log.d("CardStackView", "Paginate: " + activity_main_card_stack_view?.topIndex)
@@ -99,6 +103,19 @@ class MainActivity : AppCompatActivity(), CardAdapter.Listener {
        // adapter?.addAll(createFakeCArds())
         adapter?.notifyDataSetChanged()
     }*/
+
+    private fun updateLike(productId: String?, likes: Int?) {
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+
+
+       // var productKey: String = reference.child("reference").ch
+      //  var likes: String = reference.child("response").child(productId).child("likes")
+
+
+
+        reference.child("response").child(productId.toString()).child("likes").setValue(1)
+    }
 
     private fun reload(listProducts : ArrayList<Product>?) {
         activity_main_card_stack_view?.visibility = View.GONE

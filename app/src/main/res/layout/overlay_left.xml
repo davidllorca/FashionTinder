@@ -11,9 +11,10 @@
     app:cardUseCompatPadding="true">
 
     <ImageView
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_sentiment_very_dissatisfied_black_24dp"/>
+        android:layout_width="60dp"
+        android:padding="20dp"
+        android:layout_height="60dp"
+        android:layout_gravity="end"
+        android:src="@drawable/fill"/>
 
 </android.support.v7.widget.CardView>
