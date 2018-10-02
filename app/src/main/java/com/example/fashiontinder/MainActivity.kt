@@ -1,6 +1,7 @@
 package com.example.fashiontinder
 
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -19,7 +20,12 @@ import com.google.firebase.database.ValueEventListener
 
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CardAdapter.Listener {
+    override fun onClick(product: Product?) {
+        val intent = Intent(this, CardInfoActivity::class.java)
+        intent.addExtra()
+        startActivity(intent)
+    }
 
     private var progressBar: ProgressBar? = null
     private var adapter: CardAdapter? = null
@@ -119,7 +125,7 @@ class MainActivity : AppCompatActivity() {
     }*/
 
     private fun createCardAdapter(listProducts: ArrayList<Product>?): CardAdapter {
-        val adapter = CardAdapter(applicationContext)
+        val adapter = CardAdapter(applicationContext, this)
         adapter.addAll(listProducts)
         return adapter
     }

@@ -1,6 +1,8 @@
 package com.example.fashiontinder;
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +15,14 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 public class CardAdapter extends ArrayAdapter<Product> {
-
-    public CardAdapter(Context context) {
+    Listener listener;
+    public CardAdapter(Context context, Listener listener) {
         super(context, 0);
+        this.listener = listener;
+    }
+
+    public interface Listener{
+        public void onClick(Product product);
     }
 
     @Override
@@ -31,7 +38,7 @@ public class CardAdapter extends ArrayAdapter<Product> {
             holder = (ViewHolder) contentView.getTag();
         }
 
-        Product product = getItem(position);
+        final Product product = getItem(position);
 
         holder.name.setText(product.getName());
         holder.subtitle.setText(product.getId());
@@ -49,6 +56,12 @@ public class CardAdapter extends ArrayAdapter<Product> {
                     }
                 });
 
+        holder.info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onClick(product);
+            }
+        });
         return contentView;
     }
 
@@ -56,11 +69,13 @@ public class CardAdapter extends ArrayAdapter<Product> {
         public TextView name;
         public TextView subtitle;
         public ImageView image;
+        public ImageView info;
 
         public ViewHolder(View view) {
             this.name = (TextView) view.findViewById(R.id.item_card_title);
             this.subtitle = (TextView) view.findViewById(R.id.item_card_subtitle);
             this.image = (ImageView) view.findViewById(R.id.item_card_image);
+            this.info = (ImageView) view.findViewById(R.id.produt_info_button);
         }
     }
 
