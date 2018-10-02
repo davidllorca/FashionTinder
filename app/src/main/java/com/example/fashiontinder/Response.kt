@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
  * Created by Juan Fuentes on 2/10/18.
  */
 @Parcelize
-class Response(var response: ArrayList<Product>? = null) : Parcelable {
+class Response(var response: HashMap<String, Product>? = null) : Parcelable {
 
 
 

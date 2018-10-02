@@ -42,10 +42,9 @@ class MainActivity : AppCompatActivity() {
                 // whenever data at this location is updated.
 
                 val response = dataSnapshot.getValue(Response::class.java)
+                reload(ArrayList(response!!.response!!.values))
 
-                reload(ArrayList(response!!.response))
-
-                Log.d("DataBase", "Value is: "+response.response)
+                Log.d("DataBase", "Value is: "+response!!.response)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -70,7 +69,12 @@ class MainActivity : AppCompatActivity() {
                 Log.d("CardStackView", item.toString())
 
 
-                updateLike(item!!.id, item.likes)
+                if(direction == SwipeDirection.Right){
+                    updateLike(item!!.id, item.likes)
+                }else if(direction == SwipeDirection.Left){
+                    updateDisLike(item!!.id, item.dislikes)
+                }
+
 
                 // TODO DELETE. We want finite stack
                 if (activity_main_card_stack_view?.topIndex == adapter?.count?.minus(5)) {
@@ -102,14 +106,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateLike(productId: String?, likes: Int?) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
+        reference.child("response").child(productId.toString()).child("likes").setValue(likes!!.plus(1))
+    }
 
-
-       // var productKey: String = reference.child("reference").ch
-      //  var likes: String = reference.child("response").child(productId).child("likes")
-
-
-
-        reference.child("response").child(productId.toString()).child("likes").setValue(1)
+    private fun updateDisLike(productId: String?, dislikes: Int?) {
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+        reference.child("response").child(productId.toString()).child("dislikes").setValue(dislikes!!.plus(1))
     }
 
     private fun reload(listProducts : ArrayList<Product>?) {
