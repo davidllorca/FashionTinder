@@ -18,8 +18,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
 
 
-
-
 class MainActivity : AppCompatActivity() {
 
     private var progressBar: ProgressBar? = null
@@ -36,13 +34,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun readDB(){
-        reference.addValueEventListener(object : ValueEventListener {
+      reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
 
                 val response = dataSnapshot.getValue(Response::class.java)
                 reload(ArrayList(response!!.response!!.values))
+                reference.removeEventListener(this)
 
                 Log.d("DataBase", "Value is: "+response!!.response)
             }
