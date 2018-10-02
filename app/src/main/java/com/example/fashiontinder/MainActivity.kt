@@ -18,8 +18,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
 
-
-
 class MainActivity : AppCompatActivity(), CardAdapter.Listener {
     override fun onClick(product: Product?) {
         val intent = Intent(this, CardInfoActivity::class.java)
@@ -41,13 +39,14 @@ class MainActivity : AppCompatActivity(), CardAdapter.Listener {
     }
 
     private fun readDB(){
-        reference.addValueEventListener(object : ValueEventListener {
+      reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
 
                 val response = dataSnapshot.getValue(Response::class.java)
                 reload(ArrayList(response!!.response!!.values))
+                reference.removeEventListener(this)
 
                 Log.d("DataBase", "Value is: "+response!!.response)
             }
