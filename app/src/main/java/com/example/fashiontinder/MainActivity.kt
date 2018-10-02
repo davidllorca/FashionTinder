@@ -1,29 +1,57 @@
 package com.example.fashiontinder
 
-import android.content.Intent
+
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.yuyakaido.android.cardstackview.CardStackView
 import com.yuyakaido.android.cardstackview.SwipeDirection
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONArray
 import java.util.ArrayList
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ValueEventListener
+
+
 
 class MainActivity : AppCompatActivity() {
 
     private var progressBar: ProgressBar? = null
     private var adapter: CardAdapter? = null
 
+    private var  reference : DatabaseReference = FirebaseDatabase.getInstance().reference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setup()
-        reload()
+
+        readDB()
+    }
+
+    private fun readDB(){
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+
+                val response = dataSnapshot.getValue(Response::class.java)
+
+                reload(ArrayList(response!!.response))
+
+                Log.d("DataBase", "Value is: "+response.response)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w("DataBase", "Failed to read value.", error.toException())
+            }
+        })
     }
 
     private fun setup() {
@@ -42,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 // TODO DELETE. We want finite stack
                 if (activity_main_card_stack_view?.topIndex == adapter?.count?.minus(5)) {
                     Log.d("CardStackView", "Paginate: " + activity_main_card_stack_view?.topIndex)
-                    paginate()
+                    readDB()
                 }
             }
 
@@ -60,23 +88,24 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun paginate() {
+   /* private fun paginate() {
         activity_main_card_stack_view?.setPaginationReserved()
-        adapter?.addAll(createFakeCArds())
+       // adapter?.addAll(createFakeCArds())
         adapter?.notifyDataSetChanged()
-    }
-    private fun reload() {
+    }*/
+
+    private fun reload(listProducts : ArrayList<Product>?) {
         activity_main_card_stack_view?.visibility = View.GONE
         progressBar?.visibility = View.VISIBLE
         Handler().postDelayed({
-            adapter = createCardAdapter()
+            adapter = createCardAdapter(listProducts)
             activity_main_card_stack_view?.setAdapter(adapter)
             activity_main_card_stack_view?.visibility = View.VISIBLE
             progressBar?.visibility = View.GONE
         }, 1000)
     }
 
-    private fun createFakeCArds(): List<Card> {
+   /* private fun createFakeCArds(): List<Card> {
         val cards = ArrayList<Card>()
         val string = resources.openRawResource(R.raw.she_new).bufferedReader().use { it.readText() }
         val jsonArray = JSONArray(string)
@@ -87,11 +116,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         return cards.distinctBy { it.subtitle }
-    }
+    }*/
 
-    private fun createCardAdapter(): CardAdapter {
+    private fun createCardAdapter(listProducts: ArrayList<Product>?): CardAdapter {
         val adapter = CardAdapter(applicationContext)
-        adapter.addAll(createFakeCArds())
+        adapter.addAll(listProducts)
         return adapter
     }
 }

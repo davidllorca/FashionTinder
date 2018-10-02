@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-public class CardAdapter extends ArrayAdapter<Card> {
+public class CardAdapter extends ArrayAdapter<Product> {
 
     public CardAdapter(Context context) {
         super(context, 0);
@@ -31,12 +31,12 @@ public class CardAdapter extends ArrayAdapter<Card> {
             holder = (ViewHolder) contentView.getTag();
         }
 
-        Card card = getItem(position);
+        Product product = getItem(position);
 
-        holder.name.setText("TITLE");
-        holder.subtitle.setText("SUBTITLE");
+        holder.name.setText(product.getName());
+        holder.subtitle.setText(product.getId());
         Picasso.get()
-                .load(card.getUrl())
+                .load(product.getImage())
                 .into(holder.image, new Callback() {
                     @Override
                     public void onSuccess() {
