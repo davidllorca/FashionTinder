@@ -8,10 +8,101 @@
     tools:layout_editor_absoluteY="81dp">
 
     <TextView
-        android:id="@+id/product_labels"
+        android:id="@+id/product_id_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:padding="10dp"/>
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:text="Product ID:"
+        tools:text="Product ID"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/product_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:layout_constraintTop_toBottomOf="@id/product_id_title"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        tools:text="12345"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/product_name_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:layout_constraintTop_toBottomOf="@id/product_id"
+        android:textStyle="bold"
+        android:text="Product name:"
+        tools:text="Product name"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        tools:ignore="RtlSymmetry" />
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:layout_constraintTop_toBottomOf="@id/product_name_title"
+        tools:text="Vestido rojo"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/head_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:layout_constraintTop_toBottomOf="@id/product_name"
+        android:textStyle="bold"
+        android:text="Head Inclination:"
+        tools:text="Head incliantion"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:layout_constraintTop_toBottomOf="@id/head_title"
+        tools:text="12344"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/labels_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:layout_constraintTop_toBottomOf="@id/head"
+        android:textStyle="bold"
+        tools:text="Labels"
+        android:text="Labels:"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/labels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:layout_constraintTop_toBottomOf="@id/labels_title"
+        tools:text="clothing...."
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        tools:ignore="RtlSymmetry" />
 
 </android.support.constraint.ConstraintLayout>
